@@ -103,7 +103,8 @@ def calculated_surplus_data(sales_row):
     for stock, sales in zip(stock_data, sales_row):
         surplus = stock - sales
         surplus_data.append(surplus)
-    print(surplus_data)
+        
+    return surplus_data
 
 
 def main():
@@ -113,8 +114,9 @@ def main():
     data = get_sales_data()
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
-    surplus_data = calculated_surplus_data(sales_data)
-    update_surplus_worksheet(surplus_data)
+    surp_data = calculated_surplus_data(sales_data)
+    print(surp_data)
+    update_surplus_worksheet(surp_data)
 
 
 print("Welcome to Love Sandwiches Data Automation!\n")
