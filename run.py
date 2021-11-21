@@ -110,7 +110,7 @@ def calculated_surplus_data(sales_row):
     for stock, sales in zip(stock_data, sales_row):
         surplus = stock - sales
         surplus_data.append(surplus)
-        
+
     return surplus_data
 
 
@@ -134,7 +134,7 @@ def calculate_stock_data(data):
     """
     Calculate the average stock each item type, adding 10%
     """
-    
+
     print("Calculating stock data...\n")
     new_stock_data = []
 
@@ -145,6 +145,21 @@ def calculate_stock_data(data):
         new_stock_data.append(round(stock_num))
 
     return new_stock_data
+
+
+def get_stock_values(data):
+    """
+    returns a dictionary of the items and the calculated stock ammount
+    of the sandwiches
+    """
+    headings = SHEET.worksheet("stock").get_all_values()[0]
+
+    stock_quantity = data
+    stock_count_numbers = dict(zip(headings, stock_quantity))
+    # print(headings)
+    # print(stock_quantity)
+
+    return stock_count_numbers
 
 
 def main():
@@ -160,6 +175,8 @@ def main():
     sales_columns = get_last_5_entries_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
+    stock_values = get_stock_values(stock_data)
+    print(stock_values)
 
 
 print("Welcome to Love Sandwiches Data Automation!\n")
